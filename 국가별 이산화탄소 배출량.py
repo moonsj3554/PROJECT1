@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
-st.title("국가별 이산화탄소 배출량 시각화 (1960-2018)")
+st.title("국가별 이산화탄소 배출량 (1960-2018)")
 
 # 데이터 불러오기
 @st.cache_data
