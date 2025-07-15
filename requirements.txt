@@ -3,3 +3,4 @@ yfinance
 folium
 streamlit-folium
 pandas
+pip install streamlit folium streamlit-folium pycountry requests pandas plotly
