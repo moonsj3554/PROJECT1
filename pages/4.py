@@ -78,7 +78,7 @@ if st.checkbox("📋 상세 데이터 테이블 보기"):
     filtered_data_table = melted_df[melted_df[country_col].isin(filter_countries_data)]
     st.dataframe(filtered_data_table)
 
-# 📈 요약 테이블 및 요약 선형 그래프
+# 📈 요약 테이블 및 분리된 요약 그래프
 if st.checkbox("📈 국가별 배출량 합계 및 평균 보기"):
     st.markdown("#### 📊 국가별 이산화탄소 배출량 요약")
     filter_countries_summary = st.multiselect("🔎 국가 선택 (요약 필터)", summary_df["국가"].unique(),
@@ -86,26 +86,28 @@ if st.checkbox("📈 국가별 배출량 합계 및 평균 보기"):
     filtered_summary_table = summary_df[summary_df["국가"].isin(filter_countries_summary)]
     st.dataframe(filtered_summary_table, use_container_width=True)
 
-    # 📉 국가별 합계 및 평균 선형 그래프
-    st.markdown("#### 📈 요약 그래프 (합계 및 평균)")
-    
-    # long-form으로 변환
-    long_summary_df = filtered_summary_table.melt(
-        id_vars="국가",
-        value_vars=["배출량 합계 (톤)", "연평균 배출량 (톤)"],
-        var_name="지표",
-        value_name="배출량"
-    )
-
-    fig_summary = px.line(
-        long_summary_df,
+    # 📉 배출량 합계 그래프
+    st.markdown("#### 📈 국가별 CO₂ 배출량 **합계** 그래프")
+    fig_sum = px.line(
+        filtered_summary_table,
         x="국가",
-        y="배출량",
-        color="지표",
+        y="배출량 합계 (톤)",
         markers=True,
-        title="국가별 CO₂ 배출량 합계 및 연평균 (선형 그래프)",
-        labels={"배출량": "CO₂ 배출량 (톤)", "국가": "Country"},
-        height=500
+        title="국가별 CO₂ 배출량 합계",
+        labels={"배출량 합계 (톤)": "배출량 합계 (톤)", "국가": "Country"},
+        height=450
     )
+    st.plotly_chart(fig_sum, use_container_width=True)
 
-    st.plotly_chart(fig_summary, use_container_width=True)
+    # 📉 연평균 배출량 그래프
+    st.markdown("#### 📈 국가별 CO₂ 배출량 **연평균** 그래프")
+    fig_mean = px.line(
+        filtered_summary_table,
+        x="국가",
+        y="연평균 배출량 (톤)",
+        markers=True,
+        title="국가별 CO₂ 배출량 연평균",
+        labels={"연평균 배출량 (톤)": "연평균 배출량 (톤)", "국가": "Country"},
+        height=450
+    )
+    st.plotly_chart(fig_mean, use_container_width=True)
