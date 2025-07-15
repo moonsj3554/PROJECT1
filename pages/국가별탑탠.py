@@ -7,7 +7,7 @@ st.title("🌍 연도별 국가 CO₂ 배출량 상위 10")
 
 @st.cache_data
 def load_data():
-    df = pd.read_csv("CO2_Emissions.csv", header=1)
+    df = pd.read_csv("CO2_Emissions_1960-2018.csv", header=1)
     df.columns = df.columns.astype(str)
     df = df.rename(columns={df.columns[0]: "Country"})
     df.set_index("Country", inplace=True)
