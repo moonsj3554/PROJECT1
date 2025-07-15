@@ -1,6 +1,7 @@
-plotly
-yfinance
+streamlit
 folium
 streamlit-folium
+pycountry
+requests
 pandas
-pip install streamlit folium streamlit-folium pycountry requests pandas plotly
+plotly
