@@ -1,5 +1,5 @@
-my-co2-app/
-├── app.py
-├── CO2_Emissions.csv
-└── requirements.txt
-
+plotly
+yfinance
+folium
+streamlit-folium
+pandas
