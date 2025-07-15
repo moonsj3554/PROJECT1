@@ -5,7 +5,7 @@ import streamlit as st
 def load_data():
     # CSV 파일 로드 시 예외 처리
     try:
-        df = pd.read_csv("CO2_Emissions.csv", header=1)
+        df = pd.read_csv("CO2_Emissions_1960-2018.csv", header=1)
     except FileNotFoundError:
         st.error("❌ 'CO2_Emissions.csv' 파일을 찾을 수 없습니다.")
         return pd.DataFrame(), []
